@@ -1,13 +1,33 @@
+'use client'
+
 import React from 'react'
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls, Environment } from '@react-three/drei'
+import { GLBModel } from './GLBModel'
+
 
 function Hero() {
     return (
-        <div className='container mx-auto py-4'>
-            <div className='grid grid-cols-12 gap-5'>
-                <h1 className='col-span-12 text-[265px] font-black leading-[1.2] mt-[-98px]'>HI, I’M JOB</h1>
-                <div className='col-span-3'>
+        <div className='relative h-[700px] container mx-auto'>
+            <div className="absolute inset-0 z-0">
+                <h1 className='text-[270px] font-black mt-[-90px]'>HI, I’M JOB</h1>
+            </div>
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <Canvas camera={{ position: [0, 100, 150], fov: 50 }}>
+                    <ambientLight intensity={0.8} />
+                    <directionalLight position={[10, 10, 10]} intensity={1} />
+                    <Environment preset="sunset" />
+                    <GLBModel position={[0, 0, 0]} />
+                    <OrbitControls enableZoom={false} />
+                </Canvas>
+            </div>
+            <div className='absolute z-10 pb-4 top-[300] w-[345px]'>
+                <p className='text-2xl'>
                     Frontend developer building modern, high-performance UIs with WordPress, React, and Next.js.
-                </div>
+                </p>
+            </div>
+            <div className='absolute z-10 pb-4 top-[300] right-[15px] w-[345px]'>
+                <button className='text-white p-4 rounded-lg border border-white rounded-full px-6 text-2xl w-full hover:bg-white hover:text-black transition duration-300 ease-in-out'>Download CV</button>
             </div>
         </div>
     )
